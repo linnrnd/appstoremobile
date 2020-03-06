@@ -5,52 +5,70 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from "react-native";
 const { width } = Dimensions.get("window");
+const axios = require("axios");
 export default class Category extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: [],
+      refreshing: true
+    };
+  }
+ async componentDidMount() {
+    this.getAllCategory();
+  }
+  getAllCategory() {
+    const self = this;
+    axios
+      .get("http://103.83.190.196/LinnAppStore/public/api/categories")
+      .then(function(response) {
+        // console.log(response.data);
+        self.setState({ category: response.data, refreshing: false });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+  onRefresh = () => {
+    this.setState({
+      category: [],
+      refreshing: true
+    });
+    this.getAllCategory();
+  };
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity
-            style={styles.cardBtn}
-            onPress={() => this.props.navigation.navigate("AppName",{appName:"Game"})}
-          >
-            <Text style={styles.text}>Games</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-          style={styles.cardBtn1}
-          onPress={() => this.props.navigation.navigate("AppName",{appName:"Player"})}
-          >
-            <Text style={styles.text}>Player</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-          style={styles.cardBtn2}
-          onPress={() => this.props.navigation.navigate("AppName",{appName:"Education"})}
-          >
-            <Text style={styles.text}>Education</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-           style={styles.cardBtn3}
-           onPress={() => this.props.navigation.navigate("AppName",{appName:"Social"})}
-           >
-            <Text style={styles.text}>Social</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-          style={styles.cardBtn4}
-          onPress={() => this.props.navigation.navigate("AppName",{appName:"Camera"})}
-          >
-            <Text style={styles.text}>Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-           style={styles.cardBtn5}
-           onPress={() => this.props.navigation.navigate("AppName",{appName:"Channel"})}
-           >
-            <Text style={styles.text}>Channel</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh.bind(this)}
+            />
+          }
+        >
+          <View style={styles.btnContainer}>
+            {this.state.category.map((data, index) => {
+              return (
+                <View key={index}>
+                  <TouchableOpacity
+                    style={styles.cardBtn}
+                    onPress={() =>
+                      this.props.navigation.navigate("AppNameLatest", {
+                        appName: data.category_name,category_id:data.id
+                      })
+                    }
+                  >
+                    <Text style={styles.text}>{data.category_name}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            })}
+          </View>
         </ScrollView>
       </View>
     );
@@ -68,85 +86,23 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginTop: 10
   },
-  text:{
-     color: "white", 
-     fontSize: 15
-     },
+  text: {
+    color: "#365AF0",
+    fontSize:15
+  },
   cardBtn: {
     width: width / 2 - 50,
     height: width / 2 - 50,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "#787878",
+    borderWidth: 1,
     margin: 5,
-    elevation: 10,
-    backgroundColor: "#A600EB",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 0.5 // IOS,
-  },
-  cardBtn1: {
-    width: width / 2 - 50,
-    height: width / 2 - 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    margin: 5,
-    elevation: 10,
-    backgroundColor: "#FF6D00",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 0.5 // IOS,
-  },
-  cardBtn2: {
-    width: width / 2 - 50,
-    height: width / 2 - 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    margin: 5,
-    elevation: 10,
-    backgroundColor: "#FF0098",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 0.5 // IOS,
-  },
-  cardBtn3: {
-    width: width / 2 - 50,
-    height: width / 2 - 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    margin: 5,
-    elevation: 10,
-    backgroundColor: "#00ACFF",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 0.5 // IOS,
-  },
-  cardBtn4: {
-    width: width / 2 - 50,
-    height: width / 2 - 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    margin: 5,
-    elevation: 10,
-    backgroundColor: "#FF004A",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 0.5 // IOS,
-  },
-  cardBtn5: {
-    width: width / 2 - 50,
-    height: width / 2 - 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    margin: 5,
-    elevation: 10,
-    backgroundColor: "#FFA100",
-    shadowColor: "rgba(0,0,0, .5)", // IOS
+    // elevation: 10,
+    backgroundColor: "white",
+    shadowColor: "#787878", // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
     shadowOpacity: 0.5 // IOS,
   }

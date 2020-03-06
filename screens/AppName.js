@@ -28,19 +28,19 @@ export default class AppName extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-        <View style={styles.secondContainer}>
-          <Image
-            source={require("../assets/icons/search.jpg")}
-            style={styles.firstimg}
-          />
-          <TextInput
-            placeholder="Search. . ."
-            style={styles.textInput}
-            placeholderTextColor="#707070"
-          />
-        </View>
+          <View style={styles.secondContainer}>
+            <Image
+              source={require("../assets/icons/search.jpg")}
+              style={styles.firstimg}
+            />
+            <TextInput
+              placeholder="Search. . ."
+              style={styles.textInput}
+              placeholderTextColor="#707070"
+            />
+          </View>
 
-        {/* <View style={styles.firstContainer}>
+          {/* <View style={styles.firstContainer}>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("AppNameDetail")}
           >
@@ -56,73 +56,73 @@ export default class AppName extends React.Component {
           </View>
         </View> */}
 
-        <View style={styles.firstContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("AppNameDetail")}
-          >
-            <Image source={require("../assets/icons/game.jpg")} />
-          </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: "column",
-              marginHorizontal: 50,
-              alignItems: "center"
-            }}
-          >
-            <Text style={{ fontSize: 20 }}>Worms Zone</Text>
-            {/* <Text style={{marginTop:5}}>4.2918 for Android</Text> */}
+          <View style={styles.firstContainer}>
             <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("AppNameDetail")}
+            >
+              <Image source={require("../assets/icons/game.jpg")} />
+            </TouchableOpacity>
+            <View
               style={{
-                flexDirection: "row",
-                borderWidth: 1,
-                padding: 3,
-                marginTop: 10,
-                borderRadius: 5,
-                borderColor: "#00ACFF"
+                flexDirection: "column",
+                marginHorizontal: 50,
+                alignItems: "center"
               }}
             >
-              <Image
-                source={require("../assets/icons/download2.png")}
-                style={{ width: 30, height: 30 }}
-              />
-              <Text style={{ marginTop: 5, color: "#00ACFF" }}>DownLoad</Text>
-            </TouchableOpacity>
+              <Text style={{ fontSize: 20 }}>Worms Zone</Text>
+              {/* <Text style={{marginTop:5}}>4.2918 for Android</Text> */}
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  borderWidth: 1,
+                  padding: 3,
+                  marginTop: 10,
+                  borderRadius: 5,
+                  borderColor: "#00ACFF"
+                }}
+              >
+                <Image
+                  source={require("../assets/icons/download2.png")}
+                  style={{ width: 30, height: 30 }}
+                />
+                <Text style={{ marginTop: 5, color: "#00ACFF" }}>DownLoad</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.firstContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("AppNameDetail")}
-          >
-            <Image source={require("../assets/icons/game.jpg")} />
-          </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: "column",
-              marginHorizontal: 50,
-              alignItems: "center"
-            }}
-          >
-            <Text style={{ fontSize: 20 }}>Worms Zone</Text>
-            {/* <Text style={{marginTop:5}}>4.2918 for Android</Text> */}
+          <View style={styles.firstContainer}>
             <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("AppNameDetail")}
+            >
+              <Image source={require("../assets/icons/game.jpg")} />
+            </TouchableOpacity>
+            <View
               style={{
-                flexDirection: "row",
-                borderWidth: 1,
-                padding: 3,
-                marginTop: 10,
-                borderRadius: 5,
-                borderColor: "#00ACFF"
+                flexDirection: "column",
+                marginHorizontal: 50,
+                alignItems: "center"
               }}
             >
-              <Image
-                source={require("../assets/icons/download2.png")}
-                style={{ width: 30, height: 30 }}
-              />
-              <Text style={{ marginTop: 5, color: "#00ACFF" }}>DownLoad</Text>
-            </TouchableOpacity>
+              <Text style={{ fontSize: 20 }}>Worms Zone</Text>
+              {/* <Text style={{marginTop:5}}>4.2918 for Android</Text> */}
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  borderWidth: 1,
+                  padding: 3,
+                  marginTop: 10,
+                  borderRadius: 5,
+                  borderColor: "#00ACFF"
+                }}
+              >
+                <Image
+                  source={require("../assets/icons/download2.png")}
+                  style={{ width: 30, height: 30 }}
+                />
+                <Text style={{ marginTop: 5, color: "#00ACFF" }}>DownLoad</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
         </ScrollView>
       </View>
     );
